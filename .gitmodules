@@ -1,0 +1,6 @@
+[submodule "bundles/python-syntax"]
+	path = bundles/python-syntax
+	url = https://github.com/hdima/python-syntax.git
+[submodule "bundles/nginx"]
+	path = bundles/nginx
+	url = https://github.com/evanmiller/nginx-vim-syntax.git
