@@ -16,6 +16,7 @@ if has("lua")
 else
   call DisablePlugin('neocomplete')
 endif
+
 " disable vim-go if golang environment is not setup
 if empty($GOPATH) || ! executable("go")
   call DisablePlugin('go')
@@ -74,11 +75,7 @@ else
 endif
 
 set list
-"if &listchars ==# 'eol:$'
-"  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-"endif
 set listchars=tab:▸\ ,eol:¬
-"set listchars=tab:▸\
 " to insert ¬, type: ctrl-v u00ac
 " to insert ▸, type: ctrl-v u25b8
 
@@ -120,7 +117,96 @@ set cindent
 set formatoptions+=mMj1
 set vb t_vb=
 set background=dark
-if IsPluginEnabled("solarized") | colorscheme solarized | else | colorscheme desert | endif
+colorscheme desert
 set noshowmode
 
 call Source("filetype.vimrc")
+
+if IsPluginEnabled("python-syntax")
+  let python_highlight_all = 1
+endif
+
+if IsPluginEnabled("neocomplcache")
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use neocomplcache
+  let g:neocomplcache_enable_at_startup = 1
+  " Use smartcase.
+  let g:neocomplcache_enable_smart_case = 1
+  " Use camel case completion.
+  let g:neocomplcache_enable_camel_case_completion = 1
+  " Use underbar completion.
+  let g:neocomplcache_enable_underbar_completion = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplcache_min_syntax_length = 2
+  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+  " Define dictionary.
+  let g:neocomplcache_dictionary_filetype_lists = {
+        \ 'default' : '',
+        \ 'vimshell' : g:vimrcroot . 'cache/vimshell_hist',
+        \ 'scheme' : g:vimrcroot . 'cache/gosh_completions'
+        \ }
+
+  " Define keyword.
+  if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+  endif
+  let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+  " AutoComplPop like behavior.
+  let g:neocomplcache_enable_auto_select = 0
+  " Enable heavy omni completion.
+  if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+  endif
+  "let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+  let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+  let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+endif
+
+if IsPluginEnabled("neocomplete")
+  " Disable AutoComplPop
+  let g:acp_enableAtStartup = 0
+  " Use neocomplete
+  let g:neocomplete#enable_at_startup = 1
+  " Use smartcase
+  let g:neocomplete#enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 2
+  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+  " Define dictionary.
+  let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : g:vimrcroot . 'cache/vimshell_hist',
+        \ 'scheme' : g:vimrcroot . 'cache/gosh_completions'
+        \ }
+  " Define keyword.
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+  " set cache dir
+  let g:neocomplete#data_directory = g:vimrcroot . 'cache/neocomplete'
+
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+  " Enable heavy omni completion.
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+  let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+endif

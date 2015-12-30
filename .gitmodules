@@ -4,3 +4,12 @@
 [submodule "bundles/nginx"]
 	path = bundles/nginx
 	url = https://github.com/evanmiller/nginx-vim-syntax.git
+[submodule "bundles/airline"]
+	path = bundles/airline
+	url = https://github.com/bling/vim-airline
+[submodule "bundles/neocomplete"]
+	path = bundles/neocomplete
+	url = https://github.com/Shougo/neocomplete.vim.git
+[submodule "bundles/neocomplcache"]
+	path = bundles/neocomplcache
+	url = https://github.com/Shougo/neocomplcache.git
