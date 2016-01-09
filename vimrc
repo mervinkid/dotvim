@@ -1,6 +1,4 @@
-" vimrc by Mervin Zhang <mofei2816@gmail.com>
-set nocompatible
-set t_Co=256
+let t_Co=256
 let mapleader = ";"
 
 " get the absolute path of the file, so this vim conf can be saved
@@ -10,7 +8,7 @@ exec "source " . g:vimrcroot . "functions.vimrc"
 
 let &runtimepath = &runtimepath . "," . g:vimrcroot
 
-" {{{1 Pathogen Settings
+" Pathogen Settings
 if has("lua")
   call DisablePlugin('neocomplcache')
 else
@@ -32,7 +30,7 @@ else
   endif
 endif
 
-" {{{1 General Settings
+" General Settings
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
@@ -114,10 +112,18 @@ set nowb
 set lbr
 set smartindent
 set cindent
-set formatoptions+=mMj1
+"set formatoptions+=mMj1
 set vb t_vb=
 set background=dark
-colorscheme desert
+
+" Color Scheme
+if IsPluginEnabled('solarized')
+  colorscheme solarized
+  let g:solarized_termcolors=256
+else
+  colorscheme desert
+endif
+
 set noshowmode
 
 call Source("filetype.vimrc")

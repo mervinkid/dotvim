@@ -13,3 +13,6 @@
 [submodule "bundles/neocomplcache"]
 	path = bundles/neocomplcache
 	url = https://github.com/Shougo/neocomplcache.git
+[submodule "bundles/solarized"]
+	path = bundles/solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
