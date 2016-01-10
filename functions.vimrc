@@ -137,3 +137,11 @@ endfunction
 function! SetSkeleton(suffix, temp)
   exec "autocmd BufNewFile *." . a:suffix . " TSkeletonSetup " . g:vimrcroot . "skeletons/" . a:temp
 endfunction
+
+function! IsITerm()
+  if $TERM_PROGRAM =~ "iTerm"
+    return 1
+  else
+    return 0
+  endif
+endfunction

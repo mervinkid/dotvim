@@ -117,11 +117,11 @@ set vb t_vb=
 set background=dark
 
 " Color Scheme
-if IsPluginEnabled('solarized')
+if IsITerm() && IsPluginEnabled('solarized')
   colorscheme solarized
   let g:solarized_termcolors=256
 else
-  colorscheme desert
+  colorscheme default
 endif
 
 set noshowmode
@@ -215,4 +215,10 @@ if IsPluginEnabled("neocomplete")
   let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
   let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
   let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+endif
+
+" Airline Setting
+if IsPluginEnabled('airline')
+  " set theme
+  let g:airline_theme = 'powerlineish'
 endif
