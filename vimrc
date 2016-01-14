@@ -222,3 +222,23 @@ if IsPluginEnabled('airline')
   " set theme
   let g:airline_theme = 'powerlineish'
 endif
+
+" tagbar
+if IsPluginEnabled("tagbar")
+  nmap <silent> T :TagbarToggle<cr>
+  let g:tagbar_width = 40
+endif
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" keymap
+nmap <silent> E :Explore<cr>
+
